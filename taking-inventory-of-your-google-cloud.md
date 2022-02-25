@@ -277,6 +277,10 @@ Please export the following variables so they can be referenced in the setup ste
 
 Note: Please ensure `GCP_PROJECT` is set to an existing project and `GCP_REGION` is set to your region of choice. Additionally, set `STUB` to a unique value. You will also need to supply the Pub/Sub topic to target for your streaming Dataflow job in the `DF_BATCH_OUTPUT_TOPIC` environment variable. This topic variable must be in the form `projects/<PROJECT-NAME>/topics/<TOPIC-NAME>`.
 
+| :boom: DANGER              |
+|:---------------------------|
+| Do not set `DF_BATCH_OUTPUT_TOPIC` to the same value as `PUBSUB_TOPIC`. You will create a data feedback loop and bad things will happen to your GCP bill! |
+
 ```bash
 export STUB=$(whoami)
 export GCP_PROJECT=<your-project-id>
@@ -286,7 +290,7 @@ export DF_TEMP_BUCKET=${STUB}-df-tmp-bucket
 export PUBSUB_FUNCTION=AssetExportPubSubFunction
 export DF_FUNCTION=DataflowBatchLaunchFunction
 export PUBSUB_TOPIC=asset-export-trigger-topic
-export DF_BATCH_OUTPUT_TOPIC=<your deliver-to-hec topic>
+export DF_BATCH_OUTPUT_TOPIC=projects/${GCP_PROJECT}/topics/<your deliver-to-hec topic>
 export CS_JOB_NAME=asset-export-to-gcs-job
 export CF_SERVICE_ACCOUNT=asset-export-cf-sa
 export CF_SERVICE_ACCOUNT_EMAIL=${CF_SERVICE_ACCOUNT}@${GCP_PROJECT}.iam.gserviceaccount.com
