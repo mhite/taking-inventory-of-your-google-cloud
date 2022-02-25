@@ -165,7 +165,7 @@ gcloud functions deploy ${PUBSUB_FUNCTION} \
 Configure the Cloud Scheduler to export an asset inventory every 24 hours.
 
 ```bash
-gcloud scheduler jobs create pubsub ${CS_JOB_NAME} --schedule "0 0 * * *" --time-zone="Etc/UTC" --topic ${PUBSUB_TOPIC} --message-body "trigger"
+gcloud scheduler jobs create pubsub ${CS_JOB_NAME} --schedule "0 0 * * *" --time-zone="Etc/UTC" --topic ${PUBSUB_TOPIC} --message-body "trigger" --location=${GCP_REGION}
 ```
 
 ##### Configure props.conf
@@ -475,7 +475,7 @@ gcloud functions deploy ${DF_FUNCTION} \
 Configure the Cloud Scheduler to export an asset inventory every 24 hours.
 
 ```bash
-gcloud scheduler jobs create pubsub ${CS_JOB_NAME} --schedule "0 0 * * *" --time-zone="Etc/UTC" --topic ${PUBSUB_TOPIC} --message-body "trigger"
+gcloud scheduler jobs create pubsub ${CS_JOB_NAME} --schedule "0 0 * * *" --time-zone="Etc/UTC" --topic ${PUBSUB_TOPIC} --message-body "trigger" --location=${GCP_REGION}
 ```
 
 ##### Configure props.conf
