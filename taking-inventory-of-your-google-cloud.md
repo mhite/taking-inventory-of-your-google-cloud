@@ -354,6 +354,14 @@ gcloud projects add-iam-policy-binding ${GCP_PROJECT_NUMBER} \
     --role=roles/cloudasset.viewer
 ```
 
+Grant the new service account the ability to launch Dataflow jobs whose workers operate under the identity of the default Compute Engine service account.
+
+```bash
+gcloud iam service-accounts add-iam-policy-binding ${GCP_PROJECT_NUMBER}-compute@developer.gserviceaccount.com \
+    —-member=serviceAccount:${CF_SERVICE_ACCOUNT_EMAIL} \
+    -—role=roles/iam.serviceAccountUser
+```
+
 ##### Deploy Cloud Functions
 
 Save and deploy the asset export Cloud Function.
@@ -468,6 +476,7 @@ EOF
 gcloud functions deploy ${DF_FUNCTION} \
   --runtime=python37 \
   --ingress-settings=internal-only \
+  --service-account=${CF_SERVICE_ACCOUNT_EMAIL} \
   --timeout=540 \
   --trigger-event=google.storage.object.finalize \
   --trigger-resource=gs://${ASSET_BUCKET} \
