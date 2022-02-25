@@ -119,31 +119,34 @@ Save and deploy the asset export Cloud Function.
 ```bash
 mkdir ${PUBSUB_FUNCTION} && cd $_
 cat << EOF > main.py
+import base64
 import os
 import time
 
 
 def hello_pubsub(event, context):
+    if "data" in event:
+        data = base64.b64decode(event["data"]).decode("utf-8")
+        if data == "trigger":
+            from google.cloud import asset_v1
 
-    from google.cloud import asset_v1
+            parent_id = os.environ["PARENT"]
 
-    parent_id = os.environ["PARENT"]
+            dump_file_path = os.environ["GCS_FILE_PATH"]
+            now = time.time()
 
-    dump_file_path = os.environ["GCS_FILE_PATH"]
-    now = time.time()
+            client = asset_v1.AssetServiceClient()
+            output_config = asset_v1.OutputConfig()
+            output_config.gcs_destination.uri = dump_file_path + str(now) + ".json"
+            content_type = asset_v1.ContentType.RESOURCE
 
-    client = asset_v1.AssetServiceClient()
-    output_config = asset_v1.OutputConfig()
-    output_config.gcs_destination.uri = dump_file_path + str(now) + ".json"
-    content_type = asset_v1.ContentType.RESOURCE
-
-    response = client.export_assets(
-        request={
-            "parent": parent_id,
-            "content_type": content_type,
-            "output_config": output_config,
-        }
-    )
+            response = client.export_assets(
+                request={
+                    "parent": parent_id,
+                    "content_type": content_type,
+                    "output_config": output_config,
+                }
+            )
 EOF
 cat << EOF > requirements.txt
 # Function dependencies
@@ -358,31 +361,34 @@ Save and deploy the asset export Cloud Function.
 ```bash
 mkdir ${PUBSUB_FUNCTION} && cd $_
 cat << EOF > main.py
+import base64
 import os
 import time
 
 
 def hello_pubsub(event, context):
+    if "data" in event:
+        data = base64.b64decode(event["data"]).decode("utf-8")
+        if data == "trigger":
+            from google.cloud import asset_v1
 
-    from google.cloud import asset_v1
+            parent_id = os.environ["PARENT"]
 
-    parent_id = os.environ["PARENT"]
+            dump_file_path = os.environ["GCS_FILE_PATH"]
+            now = time.time()
 
-    dump_file_path = os.environ["GCS_FILE_PATH"]
-    now = time.time()
+            client = asset_v1.AssetServiceClient()
+            output_config = asset_v1.OutputConfig()
+            output_config.gcs_destination.uri = dump_file_path + str(now) + ".json"
+            content_type = asset_v1.ContentType.RESOURCE
 
-    client = asset_v1.AssetServiceClient()
-    output_config = asset_v1.OutputConfig()
-    output_config.gcs_destination.uri = dump_file_path + str(now) + ".json"
-    content_type = asset_v1.ContentType.RESOURCE
-
-    response = client.export_assets(
-        request={
-            "parent": parent_id,
-            "content_type": content_type,
-            "output_config": output_config,
-        }
-    )
+            response = client.export_assets(
+                request={
+                    "parent": parent_id,
+                    "content_type": content_type,
+                    "output_config": output_config,
+                }
+            )
 EOF
 cat << EOF > requirements.txt
 # Function dependencies
