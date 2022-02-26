@@ -295,6 +295,15 @@ export CF_SERVICE_ACCOUNT_EMAIL=${CF_SERVICE_ACCOUNT}@${GCP_PROJECT}.iam.gservic
 export GCP_PROJECT_NUMBER=$(gcloud projects describe $GCP_PROJECT --format="value(projectNumber)")
 ```
 
+##### Enable APIs
+
+Both the Compute and Dataflow APIs will need to be enabled.
+
+```bash
+gcloud services enable compute.googleapis.com
+gcloud services enable dataflow.googleapis.com
+```
+
 ##### Create Buckets
 
 Create a Cloud Storage bucket to receive and hold exported asset inventory data.
