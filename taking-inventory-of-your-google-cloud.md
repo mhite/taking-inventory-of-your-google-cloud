@@ -224,7 +224,6 @@ This method leverages Cloud Functions not only for triggering an export of asset
 #### Cons
 
 * [Not a Splunk or Google supported solution](https://github.com/splunk/splunk-gcp-functions/blob/master/README.md#support)
-* Whitelisting Cloud Function to Splunk HEC traffic requires additional complexity of [Cloud NAT](https://cloud.google.com/nat/docs/using-nat) and [advanced Serverless VPC Access connector configuration](https://cloud.google.com/functions/docs/networking/network-settings#route-egress-to-vpc)
 
 #### Setup
 
@@ -263,7 +262,6 @@ The following diagram illustrates this process.
 * Both Dataflow templates are in [beta, pre-GA launch stage](https://cloud.google.com/products#product-launch-stages)
 * More complex setup required compared to other methods
 * Additional costs of running a Dataflow cluster
-* Dataflow worker to Splunk HEC whitelisting requires [Cloud NAT](https://cloud.google.com/nat/docs/using-nat) to ensure static egress IPs
 
 #### Setup
 
