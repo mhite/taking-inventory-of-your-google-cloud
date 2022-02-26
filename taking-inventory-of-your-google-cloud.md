@@ -34,7 +34,7 @@ The first method involves using Cloud Scheduler to trigger a Cloud Function on a
 
 #### Cons
 
-* Large inventories may exceed file size limitations of GCP-TA GCS input (~250 MB)
+* Very large JSON files may not dependably load via GCP-TA GCS input
 
 #### Setup
 
