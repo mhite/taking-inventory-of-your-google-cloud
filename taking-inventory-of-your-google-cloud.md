@@ -282,13 +282,13 @@ Note: Please ensure `GCP_PROJECT` is set to an existing project and `GCP_REGION`
 ```bash
 export STUB=$(whoami)
 export GCP_PROJECT=<your-project-id>
+export DF_BATCH_OUTPUT_TOPIC=projects/${GCP_PROJECT}/topics/<your deliver-to-hec topic>
 export GCP_REGION=us-central1
 export ASSET_BUCKET=${STUB}-asset-bucket
 export DF_TEMP_BUCKET=${STUB}-df-tmp-bucket
 export PUBSUB_FUNCTION=AssetExportPubSubFunction
 export DF_FUNCTION=DataflowBatchLaunchFunction
 export PUBSUB_TOPIC=asset-export-trigger-topic
-export DF_BATCH_OUTPUT_TOPIC=projects/${GCP_PROJECT}/topics/<your deliver-to-hec topic>
 export CS_JOB_NAME=asset-export-to-gcs-job
 export CF_SERVICE_ACCOUNT=asset-export-cf-sa
 export CF_SERVICE_ACCOUNT_EMAIL=${CF_SERVICE_ACCOUNT}@${GCP_PROJECT}.iam.gserviceaccount.com
