@@ -300,12 +300,12 @@ export GCP_PROJECT_NUMBER=$(gcloud projects describe $GCP_PROJECT --format="valu
 Both the Compute and Dataflow APIs will need to be enabled.
 
 ```bash
+gcloud services enable cloudasset.googleapis.com
+gcloud services enable cloudbuild.googleapis.com
+gcloud services enable cloudfunctions.googleapis.com
+gcloud services enable cloudscheduler.googleapis.com
 gcloud services enable compute.googleapis.com
 gcloud services enable dataflow.googleapis.com
-gcloud services enable cloudfunctions.googleapis.com
-gcloud services enable cloudbuild.googleapis.com
-gcloud services enable cloudscheduler.googleapis.com
-gcloud services enable cloudasset.googleapis.com
 ```
 
 ##### Create Buckets
