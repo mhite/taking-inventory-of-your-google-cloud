@@ -303,6 +303,7 @@ Both the Compute and Dataflow APIs will need to be enabled.
 gcloud services enable compute.googleapis.com
 gcloud services enable dataflow.googleapis.com
 gcloud services enable cloudfunctions.googleapis.com
+gcloud services enable cloudbuild.googleapis.com
 ```
 
 ##### Create Buckets
