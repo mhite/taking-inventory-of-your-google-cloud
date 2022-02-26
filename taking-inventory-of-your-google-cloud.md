@@ -360,8 +360,8 @@ Grant the new service account the ability to launch Dataflow jobs whose workers 
 
 ```bash
 gcloud iam service-accounts add-iam-policy-binding ${GCP_PROJECT_NUMBER}-compute@developer.gserviceaccount.com \
-    —-member=serviceAccount:${CF_SERVICE_ACCOUNT_EMAIL} \
-    -—role=roles/iam.serviceAccountUser
+    --member=serviceAccount:${CF_SERVICE_ACCOUNT_EMAIL} \
+    --role=roles/iam.serviceAccountUser
 ```
 
 ##### Deploy Cloud Functions
