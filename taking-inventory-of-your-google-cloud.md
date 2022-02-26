@@ -304,6 +304,7 @@ gcloud services enable compute.googleapis.com
 gcloud services enable dataflow.googleapis.com
 gcloud services enable cloudfunctions.googleapis.com
 gcloud services enable cloudbuild.googleapis.com
+gcloud services enable cloudscheduler.googleapis.com
 ```
 
 ##### Create Buckets
