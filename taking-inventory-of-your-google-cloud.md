@@ -305,6 +305,7 @@ gcloud services enable dataflow.googleapis.com
 gcloud services enable cloudfunctions.googleapis.com
 gcloud services enable cloudbuild.googleapis.com
 gcloud services enable cloudscheduler.googleapis.com
+gcloud services enable cloudasset.googleapis.com
 ```
 
 ##### Create Buckets
@@ -368,6 +369,14 @@ gcloud projects add-iam-policy-binding ${GCP_PROJECT_NUMBER} \
     --role=roles/cloudasset.viewer
 ```
 
+Grant the new service account the ability to launch and manage Dataflow jobs.
+
+```bash
+gcloud projects add-iam-policy-binding ${GCP_PROJECT_NUMBER} \
+    --member=serviceAccount:${CF_SERVICE_ACCOUNT_EMAIL} \
+    --role=roles/dataflow.developer
+```
+
 Grant the new service account the ability to launch Dataflow jobs whose workers operate under the identity of the default Compute Engine service account.
 
 ```bash
@@ -376,6 +385,11 @@ gcloud iam service-accounts add-iam-policy-binding ${GCP_PROJECT_NUMBER}-compute
     --role=roles/iam.serviceAccountUser
 ```
 
+Grant the internal Google Cloud Asset service account access to the asset bucket.
+
+```bash
+gsutil iam ch serviceAccount:service-${GCP_PROJECT_NUMBER}@gcp-sa-cloudasset.iam.gserviceaccount.com:objectAdmin gs://${ASSET_BUCKET}
+```
 ##### Deploy Cloud Functions
 
 Save and deploy the asset export Cloud Function.
