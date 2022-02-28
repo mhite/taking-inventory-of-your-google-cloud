@@ -94,6 +94,9 @@ cat << EOF > lifecycle.json
 }
 }
 EOF
+```
+
+```bash
 gsutil lifecycle set lifecycle.json gs://${ASSET_BUCKET}
 ```
 
@@ -129,6 +132,9 @@ Save and deploy the asset export Cloud Function.
 
 ```bash
 mkdir ${PUBSUB_FUNCTION} && cd $_
+```
+
+```bash
 cat << EOF > main.py
 import base64
 import os
@@ -159,10 +165,16 @@ def hello_pubsub(event, context):
                 }
             )
 EOF
+```
+
+```bash
 cat << EOF > requirements.txt
 # Function dependencies
 google-cloud-asset==2.1.0
 EOF
+```
+
+```bash
 gcloud functions deploy ${PUBSUB_FUNCTION} \
   --runtime=python37 \
   --ingress-settings=internal-only \
@@ -345,6 +357,9 @@ cat << EOF > lifecycle.json
 }
 }
 EOF
+```
+
+```bash
 gsutil lifecycle set lifecycle.json gs://${ASSET_BUCKET}
 ```
 
@@ -407,6 +422,9 @@ Save and deploy the asset export Cloud Function.
 
 ```bash
 mkdir ${PUBSUB_FUNCTION} && cd $_
+```
+
+```bash
 cat << EOF > main.py
 import base64
 import os
@@ -437,10 +455,16 @@ def hello_pubsub(event, context):
                 }
             )
 EOF
+```
+
+```bash
 cat << EOF > requirements.txt
 # Function dependencies
 google-cloud-asset==2.1.0
 EOF
+```
+
+```bash
 gcloud functions deploy ${PUBSUB_FUNCTION} \
   --runtime=python37 \
   --ingress-settings=internal-only \
@@ -457,6 +481,9 @@ Save and deploy the batch Dataflow job launcher Cloud Function.
 
 ```bash
 mkdir ${DF_FUNCTION} && cd $_
+```
+
+```bash
 cat << EOF > main.py
 import os
 
@@ -508,10 +535,16 @@ def hello_gcs(event, context):
         )
         response = request.execute()
 EOF
+```
+
+```bash
 cat << EOF > requirements.txt
 # Function dependencies
 google-cloud-resource-manager==0.30.2
 EOF
+```
+
+```bash
 gcloud functions deploy ${DF_FUNCTION} \
   --runtime=python37 \
   --ingress-settings=internal-only \
